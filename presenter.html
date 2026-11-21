@@ -11,16 +11,32 @@ h1{font-size:24px;margin:4px 0 12px} h1 span{color:#ff5fb8}
 a.b{display:block;text-align:center;background:#2f7bff;color:#fff;text-decoration:none;font-weight:700;border-radius:14px;padding:14px;margin:8px 0}
 a.b.alt{background:#18224a;border:1px solid #2a3a72}
 small{color:#9aa9cf}
+.tabs{display:flex;gap:8px;margin:8px 0} .tabs button{flex:1;padding:10px;border-radius:12px;border:1px solid #2a3a72;background:#18224a;color:#fff;font:inherit;font-weight:700}
+.tabs button.on{background:#ff5fb8;border-color:#ff5fb8}
+.short .long-only{display:none}
 </style></head><body><div class="w">
 <h1>gn<span>AR</span>ly · presenter card</h1>
-<small>2–3 minutes · iPhone in Safari · keep this tab open behind the demo</small>
-<div class="s"><div class="t">BEFORE · Day before</div>Bookmark the home page in Safari · open the AR once · 100% battery · Do Not Disturb · a textured, well-lit table · AirPlay or QuickTime set up if streaming · hotspot as backup.</div>
-<div class="s"><div class="t">0:00 · HOOK</div>Show the home page.<div class="say">"This robot walks with no motors, no battery and no code."</div></div>
-<div class="s"><div class="t">0:20 · AR</div>Tap <b>View in your space</b>, then <b>AR</b>. Aim at the table and walk around it.<div class="say">"Gravity is its only power. Each leg swings like a pendulum, and it settles into its own natural rhythm. That's auto-resonance."</div></div>
-<div class="s"><div class="t">1:05 · LIVE PHYSICS</div>✕ to close, then <b>Open the Walker Lab</b>. Ramp to 5.5°: unstable. Back to 3°, then tap <b>Push</b>: it recovers.<div class="say">"Too steep and the gait breaks down. At 3° it's stable and recovers by itself."</div></div>
-<div class="s"><div class="t">1:50 · LESSONS</div>Tap <b>Lessons</b> and scroll one.<div class="say">"Graduate-level lessons for UWF's bipedal robots course, and later every level in its own language."</div></div>
-<div class="s"><div class="t">2:25 · CLOSE</div>Back to the home page.<div class="say">"Chance Robotics and Mirai Productions want to pilot this with UWF: robotics for humanity's harmony with all of creation."</div></div>
-<div class="s"><div class="t">IF STUCK</div>No table found → use the <b>Object</b> tab · no animation → <b>alternate animation</b> link · no internet → hotspot · anything else → Walker Lab.</div>
+<small>iPhone in Safari · keep this tab open behind the demo · clips need internet (hotspot as backup)</small>
+<div class="tabs"><button id="b3">3-min version</button><button id="b8" class="on">8-min version</button></div>
+<div id="flow">
+<div class="s"><div class="t">BEFORE · Day before</div>Bookmark the home page · open the AR once and each lesson once, and play one clip (warms the cache) · 100% battery · Do Not Disturb · a textured, well-lit table · AirPlay or QuickTime if streaming · hotspot.</div>
+<div class="s"><div class="t">0:00 · HOOK</div>Home page.<div class="say">"This robot walks with no motors, no battery and no code."</div></div>
+<div class="s"><div class="t">0:20 · AR</div>Tap <b>View in your space (AR)</b>. Aim at the table and walk around it.<div class="say">"Gravity is its only power. Each leg swings like a pendulum, and it settles into its own rhythm."</div></div>
+<div class="s long-only"><div class="t">1:10 · LESSON 1 · RESONANCE</div>Lessons path → <b>1</b>. Play Johnny's clip (35 s). Then <b>In-step drive</b> + <b>Hardening spring ON</b> and raise the throttle.<div class="say">"Johnny's rule: don't fight the spring, drive it in step. 'All we do is step on the gas.'"</div></div>
+<div class="s long-only"><div class="t">2:40 · LESSON 2 · RIMLESS WHEEL</div>Next → <b>2</b>. Drop the spokes from 8 to 4 and watch it stop, then raise the ramp.<div class="say">"Cut the rim off a wheel and you have a walker. Johnny's robots treat legs as virtual spokes."</div></div>
+<div class="s"><div class="t"><span class="long-only">3:50</span><span class="short-only"></span> · LESSON 3 · STABILITY</div><b>Lesson 3</b>: tap <b>3°</b> then <b>Push</b> (it recovers), then <b>4.8°</b> (period doubling, then a fall).<div class="say">"The ball in a bowl: below |λ| = 1 a push dies out. That's Johnny's geometric stability, and it's what our UWF students will compute."</div></div>
+<div class="s long-only"><div class="t">5:10 · LESSON 4 · BIOLOGY</div>Next → <b>4</b>. Tap <b>Bolt sprint</b> (≈4), then <b>1.5-in spoked wheel</b> (≈7–8).<div class="say">"Speed measured by size: Usain Bolt is a 4. Johnny's little spoked wheel ran at 8."</div></div>
+<div class="s long-only"><div class="t">6:20 · LESSON 5 · BUILD</div>Next → <b>5</b>. Slide the leg length.<div class="say">"Students print the XTI, predict its step rate here, then film it and test the model."</div></div>
+<div class="s"><div class="t">CLOSE</div>Home page → <b>Who is behind it</b>.<div class="say">"Chance Robotics and Mirai Productions want to pilot this with UWF: robotics for humanity's harmony with all of creation."</div></div>
+<div class="s"><div class="t">IF STUCK</div>No table found → <b>Object</b> tab · no animation → <b>Backup B</b> · clip won't play → read the quote card below it · no internet → AR, the Lab and all the interactives still work offline once opened · anything else → Walker Lab.</div>
+</div>
 <a class="b" href="index.html">Open the demo home</a>
+<a class="b alt" href="lesson-1.html">Lesson 1</a>
 <a class="b alt" href="lab.html">Open the Walker Lab</a>
-</div></body></html>
+</div>
+<script>
+const f=document.getElementById('flow'),b3=document.getElementById('b3'),b8=document.getElementById('b8');
+b3.onclick=()=>{f.classList.add('short');b3.classList.add('on');b8.classList.remove('on')};
+b8.onclick=()=>{f.classList.remove('short');b8.classList.add('on');b3.classList.remove('on')};
+</script>
+</body></html>
