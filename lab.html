@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>gnARly Walker Lab · XTI passive dynamic walker</title>
+<meta name="theme-color" content="#0b1530">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/app.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+</script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="logo">g</span><div><b class="wordmark">gn<span>AR</span>ly</b><small>Chance Robotics × Mirai Productions · beta prototype</small></div></a>
+  <nav>
+    <button data-view="lessons" class="tab">Lessons</button>
+    <button data-view="lab" class="tab active">Walker Lab</button>
+    <button data-view="about" class="tab">About</button>
+  </nav>
+</header>
+
+<main>
+  <section id="view-lab" class="view active">
+    <div id="stage">
+      <canvas id="three"></canvas>
+      <div id="ar-overlay">
+        <div id="ar-hint" class="pill">Point at the floor or a table, then tap to place the ramp</div>
+        <div id="ar-controls" class="pill">
+          <button id="ar-play">Pause</button>
+          <button id="ar-push">Push</button>
+          <label>Ramp <span id="ar-gval"></span>° <input id="ar-gamma" type="range" min="0.5" max="7" step="0.1"></label>
+          <button id="ar-exit">Exit AR</button>
+        </div>
+      </div>
+      <div class="hud" id="status">Finding gait…</div>
+      <div class="arbar">
+        <button id="btn-ar" class="primary" disabled>Checking AR…</button>
+        <a id="btn-ql" rel="ar" href="assets/models/gnarly_walker.usdz" class="btnlike primary" hidden><img src="icons/icon-192.png" alt="" class="ql-img">View in your space (AR)</a>
+        <button id="btn-viewer" class="ghost">3D model viewer</button>
+      </div>
+    </div>
+    <div id="panel">
+      <div class="lesson-prompt" id="prompt"></div>
+      <div class="controls">
+        <label>Ramp angle <b><span id="gval"></span>°</b><input id="gamma" type="range" min="0.5" max="7" step="0.1"></label>
+        <label>Leg length <b><span id="lval"></span> cm</b><input id="leglen" type="range" min="10" max="100" step="1"></label>
+        <label>Hip / leg mass ratio <b><span id="mval"></span></b><input id="massr" type="range" min="1" max="4" step="0.1"></label>
+        <label>Playback speed <b><span id="sval"></span>×</b><input id="speed" type="range" min="0.1" max="1" step="0.05"></label>
+        <div class="row">
+          <button id="play" class="primary">Pause</button>
+          <button id="push">Push</button>
+          <button id="reset">Reset</button>
+          <label class="chk"><input type="checkbox" id="knees" checked> visual knee bend</label>
+        </div>
+      </div>
+      <div class="readouts">
+        <div><small>Step frequency</small><b id="r-freq">–</b></div>
+        <div><small>Step time</small><b id="r-period">–</b></div>
+        <div><small>Leg pendulum ½-period</small><b id="r-pend">–</b></div>
+        <div><small>Resonance match</small><b id="r-res">–</b></div>
+        <div><small>Step length</small><b id="r-len">–</b></div>
+        <div><small>Stability |λ|max</small><b id="r-rho">–</b></div>
+      </div>
+      <div class="phase"><small>Phase portrait: stance-leg angle vs angular velocity (the closed loop is the limit cycle)</small><canvas id="phase" width="600" height="260"></canvas></div>
+    </div>
+  </section>
+
+  <section id="view-lessons" class="view"><div id="lesson-list"></div></section>
+
+  <section id="view-about" class="view">
+    <div class="card">
+      <h2>About this prototype</h2>
+      <p><b>gnARly</b> is an interactive lab built around the <a href="https://cults3d.com/en/3d-model/various/xti-passive-dynamic-robot-walker" target="_blank" rel="noopener">XTI Passive Dynamic Robot Walker</a> by Chance Robotics. Beta pilot audience: college engineering students (proposed: UWF Robotics &amp; Intelligent Systems).</p>
+      <p><b>Physics model:</b> planar compass-gait walker (straight legs, point masses, inelastic heel strike), solved in real time. The knee bend you see is visual only. The real XTI adds knees, elastic cord and side-to-side rocking; replace the placeholder geometry with the real STLs via <code>tools/stl_to_glb.py</code> and <code>assets/parts.json</code>.</p>
+      <p><b>AR:</b> On iPhone and iPad, “View in your space” opens Apple Quick Look with an animated USDZ of the walker stepping down a 3° ramp (no app install). On ARCore Android phones, Chrome can run the live physics in your room through WebXR.</p>
+      <p class="muted">Prototype v0.1. gnARly prototype v0.2. Draft graduate-level science copy; curriculum by Johnny Corey Godowski &amp; David Michael Patchanian Jr. to follow. Sound by Stefan Thompson to follow.</p>
+    </div>
+  </section>
+</main>
+
+<dialog id="viewer-dlg">
+  <model-viewer id="mv" src="assets/models/gnarly_walker.glb" ios-src="assets/models/gnarly_walker.usdz" ar ar-modes="webxr scene-viewer quick-look" camera-controls autoplay shadow-intensity="1" ar-scale="auto" alt="XTI walker demo model" style="width:100%;height:60vh;background:#0b1530"></model-viewer>
+  <form method="dialog"><button class="primary">Close</button></form>
+</dialog>
+
+<script type="module" src="js/main.js"></script>
+<script type="module" src="vendor/model-viewer/model-viewer.min.js"></script>
+<script>if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));</script>
+</body>
+</html>

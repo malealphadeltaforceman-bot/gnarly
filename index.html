@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>gnARly · resonant robots in AR</title>
+<meta name="description" content="gnARly: see the XTI passive dynamic walker step in your room, then explore the physics of resonant walking robots. Chance Robotics × Mirai Productions.">
+<meta name="theme-color" content="#060b1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="gnARly">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta property="og:title" content="gnARly · resonant robots in AR">
+<meta property="og:image" content="assets/img/hero.png">
+<style>
+  :root { --bg:#060b1a; --ink:#eef3ff; --muted:#9aa9cf; --blue:#2f7bff; --mag:#ff5fb8; --card:#0e1833; --line:#1d2a52; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, sans-serif; -webkit-text-size-adjust:100%; }
+  body { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 18px 40px; }
+  header { display:flex; justify-content:space-between; align-items:center; padding:14px 0; }
+  .wm { font-weight:800; font-size:22px; letter-spacing:.01em; }
+  .wm span { color: var(--mag); }
+  header a { color: var(--muted); text-decoration:none; font-size:14px; }
+  .hero { position:relative; border-radius:24px; overflow:hidden; background: radial-gradient(120% 90% at 50% 0%, #1b3a8a 0%, #12153a 45%, #2a0f36 80%, #060b1a 100%); border:1px solid var(--line); }
+  .hero .txt { padding: 22px 20px 0; }
+  .hero h1 { font-size: clamp(30px, 8vw, 46px); line-height:1.05; margin: 6px 0 8px; letter-spacing:-.02em; }
+  .hero p { color:#cfd9f7; margin:0 0 6px; }
+  .kicker { color: var(--mag); font-weight:700; font-size:13px; letter-spacing:.12em; text-transform:uppercase; }
+  .ar-link { display:block; position:relative; margin: 10px 0 0; }
+  .ar-link img { display:block; width:100%; height:auto; }
+  .ar-cta { display:flex; flex-direction:column; gap:10px; padding: 0 20px 22px; }
+  .btn { display:flex; align-items:center; justify-content:center; gap:10px; min-height:54px; border-radius:16px; font-weight:700; font-size:17px; text-decoration:none; color:#fff; background:var(--blue); border:0; }
+  .btn.alt { background:#18224a; border:1px solid #2a3a72; font-weight:600; }
+  .btn img { width:26px; height:26px; border-radius:7px; }
+  .small { font-size:13px; color:var(--muted); text-align:center; margin:2px 0 0; }
+  .small a { color:#a9c3ff; }
+  section { margin-top: 26px; }
+  h2 { font-size:22px; margin: 0 0 10px; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:10px; }
+  .stat { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:12px 14px; }
+  .stat b { display:block; font-size:24px; }
+  .stat small { color:var(--muted); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px; }
+  model-viewer { width:100%; height: 380px; background: radial-gradient(circle at 50% 30%, #16224d, #070c1d); border-radius:18px; --poster-color: transparent; }
+  .note { color:var(--muted); font-size:14px; }
+  ul.clean { padding-left: 18px; margin: 6px 0; }
+  footer { margin-top:30px; color:var(--muted); font-size:13px; text-align:center; }
+  .device-other { display:none; }
+  body.not-ios .device-ios { display:none; }
+  body.not-ios .device-other { display:block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="wm">gn<span>AR</span>ly</div>
+    <a href="lab.html">Walker Lab →</a>
+  </header>
+
+  <div class="hero">
+    <div class="txt">
+      <div class="kicker">Chance Robotics × Mirai Productions</div>
+      <h1>A robot that walks with no motors, no battery and no brain.</h1>
+      <p>The XTI passive dynamic walker runs on gravity, geometry and resonance. Put it in your room, then take its physics apart.</p>
+    </div>
+    <!-- Apple AR Quick Look: an <a rel="ar"> whose first child is an <img> opens the USDZ in AR on iPhone/iPad -->
+    <a class="ar-link" rel="ar" href="assets/models/gnarly_walker.usdz">
+      <img src="assets/img/hero.png" alt="Red-and-blue XTI-style walker on a wooden ramp. Tap to view it in your space." width="1200" height="900">
+    </a>
+    <div class="ar-cta">
+      <a class="btn device-ios" rel="ar" href="assets/models/gnarly_walker.usdz"><img src="icons/icon-192.png" alt="">View in your space (AR)</a>
+      <p class="small device-ios">Opens Apple AR Quick Look. Point at the floor or a table and the walker steps down a 3° ramp at real size. Nothing to install.</p>
+      <div class="device-other">
+        <p class="small">AR Quick Look needs an iPhone or iPad (Safari). On Android or a computer, use the 3D viewer below; ARCore phones get an AR button inside it.</p>
+      </div>
+      <a class="btn alt" href="lab.html">Open the Walker Lab (live physics)</a>
+      <p class="small">Other AR files:
+        <a rel="ar" href="assets/models/gnarly_walker_xform.usdz"><img src="icons/icon-192.png" alt="" width="1" height="1">alternate animation</a> ·
+        <a rel="ar" href="assets/models/gnarly_walker_static.usdz"><img src="icons/icon-192.png" alt="" width="1" height="1">still model</a>
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <h2>What you are looking at</h2>
+    <div class="grid">
+      <div class="stat"><b>0</b><small>motors, sensors or code on the robot</small></div>
+      <div class="stat"><b>2.7 Hz</b><small>step rate of a 25 cm-leg walker on a 3° ramp</small></div>
+      <div class="stat"><b>96%</b><small>match between step time and the leg's own pendulum swing</small></div>
+      <div class="stat"><b>4.4°</b><small>steepest ramp before the gait period-doubles</small></div>
+    </div>
+    <p class="note">Numbers come from the app's compass-gait model of a passive walker. The swing leg acts like a pendulum, so the gait settles at the leg's natural frequency. That self-tuning rhythm is what we mean by auto-resonance.</p>
+  </section>
+
+  <section>
+    <h2>Spin it in 3D</h2>
+    <model-viewer src="assets/models/gnarly_walker.glb" ios-src="assets/models/gnarly_walker.usdz" alt="Animated XTI-style passive walker on a ramp" camera-controls autoplay ar ar-modes="webxr scene-viewer quick-look" shadow-intensity="1" camera-orbit="30deg 70deg 1.6m" touch-action="pan-y"></model-viewer>
+  </section>
+
+  <section>
+    <h2>Inside the Walker Lab</h2>
+    <div class="card">
+      <ul class="clean">
+        <li>Live simulation: change the ramp angle, leg length and mass ratio, then push the walker and watch it recover.</li>
+        <li>Phase portrait and Poincaré-map stability, in real time.</li>
+        <li>Six graduate-level lessons: hybrid dynamics, limit cycles, resonance, biology, and building and testing the real XTI.</li>
+      </ul>
+      <p><a class="btn alt" href="lab.html">Open the Walker Lab</a></p>
+      <p class="note" style="margin-bottom:0"><a href="lab.html#lessons" style="color:#a9c3ff">Go straight to the lessons →</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Who is behind it</h2>
+    <div class="card">
+      <p style="margin-top:0"><b>Chance Robotics</b> and <b>Mirai Productions LLC</b> (Pensacola, FL). Built by David Michael Patchanian Jr., Johnny Corey Godowski and Stefan Thompson.</p>
+      <p class="note" style="margin-bottom:0">Our vision: robotics for humanity's harmony with all of creation, not its destruction. Proposed first pilot: graduate students at the University of West Florida.</p>
+    </div>
+  </section>
+
+  <footer>gnARly prototype v0.2 · The XTI Passive Dynamic Robot Walker design is by Chance Robotics. · <a href="presenter.html" style="color:#9aa9cf">Presenter card</a></footer>
+</div>
+<script>
+  // Show the Quick Look button only where AR Quick Look exists (iOS/iPadOS Safari & in-app Safari views)
+  const a = document.createElement('a');
+  const qlSupported = a.relList && a.relList.supports && a.relList.supports('ar');
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (!(qlSupported || isIOS)) document.body.classList.add('not-ios');
+  // load model-viewer only when the 3D section is near, to keep first paint fast
+  const mv = document.querySelector('model-viewer');
+  const load = () => { const s = document.createElement('script'); s.type = 'module'; s.src = 'vendor/model-viewer/model-viewer.min.js'; document.head.appendChild(s); };
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver((e) => { if (e.some((x) => x.isIntersecting)) { load(); io.disconnect(); } }, { rootMargin: '400px' }); io.observe(mv); } else load();
+  if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+</script>
+</body>
+</html>
