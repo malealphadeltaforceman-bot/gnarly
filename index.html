@@ -9,10 +9,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="gnARly">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <meta property="og:title" content="gnARly · resonant robots in AR">
-<meta property="og:image" content="assets/img/hero.png">
+<meta property="og:image" content="hero.png">
 <style>
   :root { --bg:#060b1a; --ink:#eef3ff; --muted:#9aa9cf; --blue:#2f7bff; --mag:#ff5fb8; --card:#0e1833; --line:#1d2a52; }
   * { box-sizing: border-box; }
@@ -29,7 +29,20 @@
   .hero p { color:#cfd9f7; margin:0 0 6px; }
   .kicker { color: var(--mag); font-weight:700; font-size:13px; letter-spacing:.12em; text-transform:uppercase; }
   .ar-link { display:block; position:relative; margin: 10px 0 0; }
-  .ar-link img { display:block; width:100%; height:auto; }
+  .ar-link img { display:block; width:100%; height:auto; max-height:62vh; object-fit:cover; }
+  .alts { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .alt-ar { display:flex; align-items:center; gap:8px; padding:8px; border-radius:14px; background:#18224a; border:1px solid #2a3a72; color:#fff; text-decoration:none; font-weight:600; font-size:14px; }
+  .alt-ar img { width:44px; height:33px; object-fit:cover; border-radius:8px; }
+  /* landscape phones: put the picture and the buttons side by side */
+  @media (orientation: landscape) and (max-height: 600px) {
+    .wrap { max-width: 980px; }
+    .hero { display:grid; grid-template-columns: 1.1fr 1fr; align-items:center; }
+    .hero .txt { grid-column: 1 / -1; padding-bottom: 4px; }
+    .hero h1 { font-size: 28px; }
+    .ar-link img { max-height: 70vh; }
+    .ar-cta { padding-top: 14px; }
+    model-viewer { height: 80vh; }
+  }
   .ar-cta { display:flex; flex-direction:column; gap:10px; padding: 0 20px 22px; }
   .btn { display:flex; align-items:center; justify-content:center; gap:10px; min-height:54px; border-radius:16px; font-weight:700; font-size:17px; text-decoration:none; color:#fff; background:var(--blue); border:0; }
   .btn.alt { background:#18224a; border:1px solid #2a3a72; font-weight:600; }
@@ -66,20 +79,21 @@
       <p>The XTI passive dynamic walker runs on gravity, geometry and resonance. Put it in your room, then take its physics apart.</p>
     </div>
     <!-- Apple AR Quick Look: an <a rel="ar"> whose first child is an <img> opens the USDZ in AR on iPhone/iPad -->
-    <a class="ar-link" rel="ar" href="assets/models/gnarly_walker.usdz">
-      <img src="assets/img/hero.png" alt="Red-and-blue XTI-style walker on a wooden ramp. Tap to view it in your space." width="1200" height="900">
+    <a class="ar-link" rel="ar" href="gnarly_walker.usdz">
+      <img src="hero.png" alt="Red-and-blue XTI-style walker on a wooden ramp. Tap to view it in your space." width="1200" height="900">
     </a>
     <div class="ar-cta">
-      <a class="btn device-ios" rel="ar" href="assets/models/gnarly_walker.usdz"><img src="icons/icon-192.png" alt="">View in your space (AR)</a>
+      <a class="btn device-ios" rel="ar" href="gnarly_walker.usdz"><img src="icon-192.png" alt="">View in your space (AR)</a>
       <p class="small device-ios">Opens Apple AR Quick Look. Point at the floor or a table and the walker steps down a 3° ramp at real size. Nothing to install.</p>
       <div class="device-other">
         <p class="small">AR Quick Look needs an iPhone or iPad (Safari). On Android or a computer, use the 3D viewer below; ARCore phones get an AR button inside it.</p>
       </div>
       <a class="btn alt" href="lab.html">Open the Walker Lab (live physics)</a>
-      <p class="small">Other AR files:
-        <a rel="ar" href="assets/models/gnarly_walker_xform.usdz"><img src="icons/icon-192.png" alt="" width="1" height="1">alternate animation</a> ·
-        <a rel="ar" href="assets/models/gnarly_walker_static.usdz"><img src="icons/icon-192.png" alt="" width="1" height="1">still model</a>
-      </p>
+      <div class="alts device-ios">
+        <a class="alt-ar" rel="ar" href="gnarly_walker_xform.usdz"><img src="hero.png" alt="Walker preview">Backup B: walking</a>
+        <a class="alt-ar" rel="ar" href="gnarly_walker_static.usdz"><img src="hero.png" alt="Walker preview">Backup C: still</a>
+      </div>
+      <p class="small device-ios">If the main button doesn't animate on your phone, try Backup B. Backup C is a still model.</p>
     </div>
   </div>
 
@@ -96,7 +110,7 @@
 
   <section>
     <h2>Spin it in 3D</h2>
-    <model-viewer src="assets/models/gnarly_walker.glb" ios-src="assets/models/gnarly_walker.usdz" alt="Animated XTI-style passive walker on a ramp" camera-controls autoplay ar ar-modes="webxr scene-viewer quick-look" shadow-intensity="1" camera-orbit="30deg 70deg 1.6m" touch-action="pan-y"></model-viewer>
+    <model-viewer src="gnarly_walker.glb" ios-src="gnarly_walker.usdz" alt="Animated XTI-style passive walker on a ramp" camera-controls autoplay ar ar-modes="webxr scene-viewer quick-look" shadow-intensity="1" camera-orbit="30deg 70deg 1.6m" touch-action="pan-y"></model-viewer>
   </section>
 
   <section>
@@ -120,7 +134,7 @@
     </div>
   </section>
 
-  <footer>gnARly prototype v0.2 · The XTI Passive Dynamic Robot Walker design is by Chance Robotics. · <a href="presenter.html" style="color:#9aa9cf">Presenter card</a></footer>
+  <footer>gnARly prototype v0.3 (flat build, Nov 21 2026) · The XTI Passive Dynamic Robot Walker design is by Chance Robotics. · <a href="presenter.html" style="color:#9aa9cf">Presenter card</a></footer>
 </div>
 <script>
   // Show the Quick Look button only where AR Quick Look exists (iOS/iPadOS Safari & in-app Safari views)
@@ -130,7 +144,7 @@
   if (!(qlSupported || isIOS)) document.body.classList.add('not-ios');
   // load model-viewer only when the 3D section is near, to keep first paint fast
   const mv = document.querySelector('model-viewer');
-  const load = () => { const s = document.createElement('script'); s.type = 'module'; s.src = 'vendor/model-viewer/model-viewer.min.js'; document.head.appendChild(s); };
+  const load = () => { const s = document.createElement('script'); s.type = 'module'; s.src = 'model-viewer.min.js'; document.head.appendChild(s); };
   if ('IntersectionObserver' in window) { const io = new IntersectionObserver((e) => { if (e.some((x) => x.isIntersecting)) { load(); io.disconnect(); } }, { rootMargin: '400px' }); io.observe(mv); } else load();
   if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 </script>

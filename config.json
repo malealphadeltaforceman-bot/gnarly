@@ -1,0 +1,4 @@
+{
+  "comment": "Set webUrl to wherever the app folder is hosted over HTTPS (GitHub Pages, Netlify, Cloudflare Pages...). The Android APK opens it in Chrome for live WebXR AR.",
+  "webUrl": "https://malealphadeltaforceman-bot.github.io/gnarly/lab.html"
+}

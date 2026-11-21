@@ -6,11 +6,11 @@
 <title>gnARly Walker Lab · XTI passive dynamic walker</title>
 <meta name="theme-color" content="#0b1530">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="stylesheet" href="css/app.css">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="app.css">
 <script type="importmap">
-{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/addons/" } }
+{ "imports": { "three": "./three.module.js" } }
 </script>
 </head>
 <body>
@@ -39,7 +39,7 @@
       <div class="hud" id="status">Finding gait…</div>
       <div class="arbar">
         <button id="btn-ar" class="primary" disabled>Checking AR…</button>
-        <a id="btn-ql" rel="ar" href="assets/models/gnarly_walker.usdz" class="btnlike primary" hidden><img src="icons/icon-192.png" alt="" class="ql-img">View in your space (AR)</a>
+        <a id="btn-ql" rel="ar" href="gnarly_walker.usdz" class="btnlike primary" hidden><img src="icon-192.png" alt="" class="ql-img">View in your space (AR)</a>
         <button id="btn-viewer" class="ghost">3D model viewer</button>
       </div>
     </div>
@@ -75,20 +75,20 @@
     <div class="card">
       <h2>About this prototype</h2>
       <p><b>gnARly</b> is an interactive lab built around the <a href="https://cults3d.com/en/3d-model/various/xti-passive-dynamic-robot-walker" target="_blank" rel="noopener">XTI Passive Dynamic Robot Walker</a> by Chance Robotics. Beta pilot audience: college engineering students (proposed: UWF Robotics &amp; Intelligent Systems).</p>
-      <p><b>Physics model:</b> planar compass-gait walker (straight legs, point masses, inelastic heel strike), solved in real time. The knee bend you see is visual only. The real XTI adds knees, elastic cord and side-to-side rocking; replace the placeholder geometry with the real STLs via <code>tools/stl_to_glb.py</code> and <code>assets/parts.json</code>.</p>
+      <p><b>Physics model:</b> planar compass-gait walker (straight legs, point masses, inelastic heel strike), solved in real time. The knee bend you see is visual only. The real XTI adds knees, elastic cord and side-to-side rocking; replace the placeholder geometry with the real STLs via <code>tools/stl_to_glb.py</code> and <code>parts.json</code>.</p>
       <p><b>AR:</b> On iPhone and iPad, “View in your space” opens Apple Quick Look with an animated USDZ of the walker stepping down a 3° ramp (no app install). On ARCore Android phones, Chrome can run the live physics in your room through WebXR.</p>
-      <p class="muted">Prototype v0.1. gnARly prototype v0.2. Draft graduate-level science copy; curriculum by Johnny Corey Godowski &amp; David Michael Patchanian Jr. to follow. Sound by Stefan Thompson to follow.</p>
+      <p class="muted">gnARly prototype v0.3. Draft graduate-level science copy; curriculum by Johnny Corey Godowski &amp; David Michael Patchanian Jr. to follow. Sound by Stefan Thompson to follow.</p>
     </div>
   </section>
 </main>
 
 <dialog id="viewer-dlg">
-  <model-viewer id="mv" src="assets/models/gnarly_walker.glb" ios-src="assets/models/gnarly_walker.usdz" ar ar-modes="webxr scene-viewer quick-look" camera-controls autoplay shadow-intensity="1" ar-scale="auto" alt="XTI walker demo model" style="width:100%;height:60vh;background:#0b1530"></model-viewer>
+  <model-viewer id="mv" src="gnarly_walker.glb" ios-src="gnarly_walker.usdz" ar ar-modes="webxr scene-viewer quick-look" camera-controls autoplay shadow-intensity="1" ar-scale="auto" alt="XTI walker demo model" style="width:100%;height:60vh;background:#0b1530"></model-viewer>
   <form method="dialog"><button class="primary">Close</button></form>
 </dialog>
 
-<script type="module" src="js/main.js"></script>
-<script type="module" src="vendor/model-viewer/model-viewer.min.js"></script>
+<script type="module" src="main.js"></script>
+<script type="module" src="model-viewer.min.js"></script>
 <script>if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));</script>
 </body>
 </html>

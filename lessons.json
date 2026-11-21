@@ -1,0 +1,73 @@
+{
+  "version": "0.2-prototype",
+  "level": "Graduate. Pitched at the depth of UWF's EEE 6734 Bipedal Walking Robots elective. Later tracks will teach each level of education (undergraduate, high school, public) in its own language and depth, so everyone is welcome.",
+  "note": "DRAFT science copy for the UWF beta. Items marked [CURRICULUM] are placeholders for Johnny Corey Godowski and David Michael Patchanian Jr. to replace with their auto-resonance write-up.",
+  "lessons": [
+    {
+      "id": "L1",
+      "title": "1. Passive dynamics as a hybrid system",
+      "minutes": 30,
+      "objectives": ["Write the compass-gait walker as a hybrid dynamical system", "State the per-step energy balance"],
+      "body": "A passive dynamic walker has no actuators or controller. On a ramp of angle γ, the swing phase obeys M(q)q̈ + C(q,q̇)q̇ + G(q) = 0 with q = [θ_stance, θ_swing]. When the swing foot reaches the ground (guard surface θ1 + θ2 = 2γ), an instantaneous inelastic impact applies a reset map Δ: the legs swap roles, and angular momentum is conserved about the new contact point and about the hip for the trailing leg. On a steady gait, the potential energy released per step, m_total·g·(step length)·sin γ, equals the kinetic energy lost at heel strike (McGeer 1990; Collins, Ruina, Tedrake & Wisse, Science 2005). The XTI walker is the physical version: a hip frame, two legs with passive knee locks, and elastic cord.",
+      "grad": "derive M(q) for point masses m_h (hip) and m (legs, at a from the foot and b from the hip), then check it against app/js/sim.js and docs/SCIENCE_MODEL.md. Show that energy is conserved during the swing phase (npm run test:sim checks this numerically).",
+      "tryIt": { "gammaDeg": 3, "legLength": 0.25, "massRatio": 2, "prompt": "Press Play. The same step repeats with no control input. Look for where energy is gained and where it is lost." },
+      "quiz": { "q": "On a steady passive gait, the potential energy released each step is...", "options": ["Stored in the legs indefinitely", "Dissipated mostly at heel strike", "Returned to the ramp"], "answer": 1 },
+      "placeholder": "[CURRICULUM] The XTI design story, photos and assembly video from David."
+    },
+    {
+      "id": "L2",
+      "title": "2. Periodic gaits, Poincaré maps and bifurcations",
+      "minutes": 40,
+      "objectives": ["Find a periodic gait as a fixed point of the step-to-step map", "Judge orbital stability from the Floquet multipliers", "Identify the period-doubling route to chaos"],
+      "body": "Sample the state just after each heel strike to get the Poincaré (step-to-step) map x_{k+1} = P(x_k). A periodic gait is a fixed point x* = P(x*). The app finds it with Newton's method on P(x) − x and a finite-difference Jacobian J. The eigenvalues of J (the Floquet multipliers) decide orbital stability: the gait is stable when every |λ| < 1. For a = b and m_h/m = 2, the period-1 gait is stable up to about 4.4° in this model. At that point one multiplier crosses −1, the gait period-doubles into alternating long and short steps, and steeper slopes bring chaos and falls (Goswami, Thuilot & Espiau 1998 report about 4.3°).",
+      "grad": "sweep γ from 1° to 6° in 0.1° steps, recording |λ|max, step length and step period. Plot the bifurcation onset and compare it with the literature. Discuss why a 3D walker needs additional, lateral stability (Kuo 1999).",
+      "tryIt": { "gammaDeg": 4.8, "legLength": 0.25, "massRatio": 2, "prompt": "Sweep the ramp from 1° to 6°. Note where |λ| passes 1 and what the steps look like beyond it." },
+      "quiz": { "q": "A Floquet multiplier of −1.2 implies...", "options": ["Monotone convergence to the gait", "Growing step-to-step alternation (period doubling)", "Resonance with the leg pendulum"], "answer": 1 },
+      "placeholder": "[CURRICULUM] A lab sheet comparing the real XTI on three ramp angles."
+    },
+    {
+      "id": "L3",
+      "title": "3. Natural dynamics and resonance of the swing leg",
+      "minutes": 30,
+      "objectives": ["Predict step time from the swing-leg pendulum", "Apply dynamic similarity (Froude number)"],
+      "body": "The swing leg is a pendulum hanging from the hip. For a point-mass leg its natural half-period is π√(b/g); for a real leg (compound pendulum) the full period is T = 2π√(I_hip / (m·g·d)). In the app, the passive step time lands within 3–4% of the pendulum half-period at every leg length: the gait runs at the leg's natural frequency, and step frequency scales as √(g/l). Animals of different sizes move in dynamically similar ways at equal Froude number Fr = v²/(g·l).",
+      "grad": "measure the XTI leg's hip moment of inertia with a swing test (time 20 small oscillations about the hip axle). Predict the step frequency, then check it against slow-motion video. Explain the residual difference.",
+      "tryIt": { "gammaDeg": 3, "legLength": 0.15, "massRatio": 2, "prompt": "Vary leg length from 10 to 40 cm. Resonance match stays near 100% while frequency scales as √(g/l)." },
+      "quiz": { "q": "Making the legs 4× longer changes the step frequency by a factor of...", "options": ["2", "0.5", "0.25"], "answer": 1 },
+      "placeholder": "[CURRICULUM] Insert David's resonance science document (pending)."
+    },
+    {
+      "id": "L4",
+      "title": "4. Auto-resonance: self-excited oscillation and limit cycles",
+      "minutes": 40,
+      "objectives": ["Define a self-excited (auto-resonant) oscillator", "Relate the walker's limit cycle to energy balance and orbital stability"],
+      "body": "A self-excited oscillator draws energy from a non-oscillating source and settles at its own amplitude and frequency. Examples are the van der Pol oscillator, a bowed string and a clock escapement. The passive walker turns a constant source (gravity on the slope) into a stable limit cycle; the phase portrait shows it as a closed orbit. Disturbances (the Push button) decay geometrically, by about |λ|max per step, which links the Poincaré analysis to what students can see.",
+      "grad": "apply Push, then log the stance-leg angular velocity at each heel strike. Fit the decay ratio and compare it with |λ|max from the app. Compare the walker with a van der Pol oscillator: what plays the role of negative damping?",
+      "tryIt": { "gammaDeg": 3, "legLength": 0.25, "massRatio": 2, "prompt": "Press Push several times and watch the phase portrait return to the same closed orbit." },
+      "quiz": { "q": "A limit cycle is...", "options": ["An isolated closed orbit that nearby trajectories approach or leave", "Any periodic solution of a linear system", "The fastest feasible gait"], "answer": 0 },
+      "placeholder": "[CURRICULUM] Johnny + David: auto-resonance definitions and the XTI-specific mechanism (elastic cord, knee lock)."
+    },
+    {
+      "id": "L5",
+      "title": "5. Biological locomotion exploits natural dynamics",
+      "minutes": 30,
+      "objectives": ["Contrast inverted-pendulum walking with spring-mass running", "Use cost of transport to compare robots and animals"],
+      "body": "Walking is an inverted pendulum over the stance leg plus a pendular swing leg. Running is a spring-mass system (Blickhan 1989), with tendons such as the Achilles storing and returning elastic energy. People prefer a stride frequency close to the natural frequency of the leg pendulum (Holt, Hamill & Andres 1991). Many insects drive their wings at thoracic resonance using asynchronous flight muscle. Collins et al. (2005) report a specific cost of transport of about 0.2 for both the Cornell passive-based biped and humans, against about 3.2 for Honda's ASIMO. On the XTI, the bungee cord plays the tendon and the knee lock plays the extended stance knee.",
+      "grad": "estimate the XTI's cost of transport on the ramp, (m·g·Δh)/(m·g·d) = sin γ per unit distance, and discuss what changes when a small actuator replaces the ramp.",
+      "tryIt": { "gammaDeg": 2.5, "legLength": 0.9, "massRatio": 2, "prompt": "Set the leg length to a human-like 0.9 m and compare the step frequency with your own cadence." },
+      "quiz": { "q": "In the XTI walker the elastic cord is the analogue of a...", "options": ["Motor neuron", "Tendon", "Bone"], "answer": 1 },
+      "placeholder": "[CURRICULUM] Biology examples and references from the resonance document."
+    },
+    {
+      "id": "L6",
+      "title": "6. Build, identify and validate the XTI",
+      "minutes": 120,
+      "objectives": ["Print and assemble the XTI", "Identify model parameters", "Validate the model against measured gait"],
+      "body": "Print the parts (PLA or PETG, 0.2 mm layers, 20–30% infill, 3–4 walls, supports where needed) and assemble with 1/8-inch elastic cord. Measure leg length, part masses, centre-of-mass locations (balance test) and leg inertia (swing test). Film the walker on a measured ramp in slow motion (an iPhone shoots 240 fps), then extract step period and step length. Enter the parameters in the Lab and compare. Write an error budget covering knees, foot radius, 3D rocking, friction and cord preload.",
+      "grad": "Extension: build a kneed walker model (McGeer 1990, 'Passive walking with knees') with an elastic element for the cord, and fit the cord stiffness to your data.",
+      "tryIt": { "gammaDeg": 3, "legLength": 0.25, "massRatio": 2, "prompt": "Enter your measured leg length and ramp angle, then compare with your video." },
+      "quiz": { "q": "Which effect is NOT in the app's planar compass-gait model?", "options": ["Gravity", "Heel-strike energy loss", "Lateral (side-to-side) rocking"], "answer": 2 },
+      "placeholder": "[CURRICULUM] Assembly video (David), part list, exact weights and bungee tension guide."
+    }
+  ]
+}

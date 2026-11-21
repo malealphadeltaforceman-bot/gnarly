@@ -1,0 +1,10 @@
+{
+  "comment": "Asset-swap manifest. Convert David's STLs with tools/stl_to_glb.py, drop the .glb files next to index.html (flat folder, no subfolders), then set 'file' below. Parts left null use the procedural placeholder. Origins: pelvis and thigh at the hip axle, shank and foot at the knee. Legs hang along -Y, walking direction is +X, units are metres.",
+  "parts": {
+    "pelvis": { "file": null, "color": "#1f4fd8" },
+    "thigh":  { "file": null, "color": "#d62828", "mirrorForLegB": false },
+    "shank":  { "file": null, "color": "#d62828", "mirrorForLegB": false },
+    "foot":   { "file": null, "color": "#d62828" }
+  },
+  "fullModel": { "file": "gnarly_walker.glb", "comment": "Used by the 'View in your space' viewer (Scene Viewer / Quick Look). Replace with the converted full XTI assembly when available." }
+}
